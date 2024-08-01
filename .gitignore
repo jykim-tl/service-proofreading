@@ -1,0 +1,7 @@
+.env*
+*.jpg
+test
+test/*
+venv
+test-main-url.py
+test-main.py
