@@ -14,7 +14,7 @@ def raise_error():
     raise ValueError("Check Event Body.")
 
 def respond(err, totalTokens, parsedContent):
-    return {
+    response = {
         'statusCode': '400' if err else '200',
         'body': err.message if err else json.dumps({
             "totalTokens": totalTokens,
@@ -25,6 +25,10 @@ def respond(err, totalTokens, parsedContent):
             'Content-Type': 'application/json',
         },
     }
+    print('######### RESPONSE #########')
+    print(response)
+    
+    return response
 
 
 def lambda_handler(event, context):
@@ -59,16 +63,16 @@ def lambda_handler(event, context):
         messages=[
           {
             "role": "user",
-            "content": promptText
-          },
-          {
-            "role": "user",
-            "content": {
+            "content": [
+               {
+                  "type":"text",
+                  "text": promptText
+               },
+               {
                 "type": "image_url",
-                "image_url": {
-                    "url": imageUrl
-                }
-            }
+                "image_url": {"url": imageUrl}
+               }
+            ]
           }
         ],        
       )
