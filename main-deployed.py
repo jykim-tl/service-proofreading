@@ -10,10 +10,17 @@ API_KEY = os.environ['apiKey']
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+def raise_error():
+    raise ValueError("Check Event Body.")
+
 def respond(err, totalTokens, parsedContent):
     return {
         'statusCode': '400' if err else '200',
-        'body': err.message if err else json.dumps({"totalTokens":totalTokens, "parsedText": parsedContent["parsedText"], "aiEditedText" : parsedContent["aiEditedText"]}).encode('utf8'),
+        'body': err.message if err else json.dumps({
+            "totalTokens": totalTokens,
+            "parsedText": parsedContent["parsedText"],
+            "aiEditedText": parsedContent["aiEditedText"]
+        }).encode('utf8'),
         'headers': {
             'Content-Type': 'application/json',
         },
@@ -22,8 +29,15 @@ def respond(err, totalTokens, parsedContent):
 
 def lambda_handler(event, context):
     # params = parse_qs(event)
-    # image_url = params['imageUrl']
-    image_url = event['imageUrl']
+    print(event)
+    try:
+      body = event['body']
+      parsedBody = json.loads(body)
+      imageUrl = parsedBody['imageUrl']
+    except Exception as e:
+      print(f"Caught an error: {e}")
+      raise_error()
+    
     
     client = OpenAI(api_key=API_KEY)
     
@@ -37,37 +51,38 @@ def lambda_handler(event, context):
     Markdown strikethroughs use double ~~, not single ~. For example ~~the~~, not ~the~. Do not add any other comments to the response.
     '''
     
-    print(image_url)
+    print(imageUrl)
 
-    response = client.chat.completions.create(
-      model="gpt-4o",
-      messages=[
-        {
-          "role": "user",
-          "content": [
-            {
-              "type": "text",
-              "text": promptText
-            },
-            {
-              "type": "image_url",
-              "image_url": {
-                "url": image_url
-              },
-            },
-          ],
-        }
-      ],
-      # max_tokens=500,
-    )
-    
-    totalTokens = response.usage.total_tokens
-    print('TOTAL TOKENS USED',totalTokens)
-    print('==================================================')
-    content = response.choices[0].message.content
-    print(content)
-    print('==================================================')
-    parsedContent = json.loads(content)
-    print(parsedContent)
-
-    return respond(None, totalTokens, parsedContent)
+    try:
+      response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+          {
+            "role": "user",
+            "content": promptText
+          },
+          {
+            "role": "user",
+            "content": {
+                "type": "image_url",
+                "image_url": {
+                    "url": imageUrl
+                }
+            }
+          }
+        ],        
+      )
+      
+      totalTokens = response.usage.total_tokens
+      print('TOTAL TOKENS USED', totalTokens)
+      print('==================================================')
+      content = response.choices[0].message.content
+      print(content)
+      print('==================================================')
+      parsedContent = json.loads(content)
+      print(parsedContent)
+  
+      return respond(None, totalTokens, parsedContent)
+    except Exception as e:
+      logger.error(f"Exception during OpenAI API call: {e}")
+      raise_error()
