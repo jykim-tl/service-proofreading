@@ -38,12 +38,35 @@ def lambda_handler(event, context):
       body = event['body']
       parsedBody = json.loads(body)
       imageUrl = parsedBody['imageUrl']
+      levelName = parsedBody['levelName']
+      subjectName = parsedBody['subjectName']
     except Exception as e:
       print(f"Caught an error: {e}")
       raise_error()
     
-    
     client = OpenAI(api_key=API_KEY)
+    
+    """
+    24.08.13 jy.kim
+    levelName, subjectName 기준으로 prompt 변경 필요.
+    proofreading 수준 및 comment 수준 결정해야함.
+    """
+
+    commentPromptMapByLevelName ={
+       "V1":"",
+       "V2":"",
+       "V3":"",
+       "O1":"",
+       "O2":"",
+       "O3":"",
+    }
+
+    # subjectName 대문자로 전환하여 조회해서 사용.
+    commentPromptMapBySubjectName ={
+       "SPEECH":"",
+       "DEBATE":"",
+       "WRITING":"",
+    }
     
     promptText = '''
     I want the answer to be given in a JSON format, which has two keys. "parsedText" and "aiEditedText". So It should be in perfect json format like {"parsedText":"first task result", "aiEditedText":"second task result"}. DO NOT INCLUDE ```json in the prefix and ``` in the postfix.
