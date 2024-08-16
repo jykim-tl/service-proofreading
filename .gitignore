@@ -5,3 +5,7 @@ test/*
 venv
 test-main-url.py
 test-main.py
+main-deployed-local-test.py
+main-deployed-string-version.py
+sample.md
+test.js
