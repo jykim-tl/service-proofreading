@@ -42,7 +42,7 @@ def lambda_handler(event, context):
       subjectName = parsedBody['subjectName']
     except Exception as e:
       print(f"Caught an error: {e}")
-      raise_error("CHECK EVENT BODY")
+      raise_error("CHECK EVENT BODY It should include imageUrl, levelName, subjectName")
 
     print(f"PARSED_BODY : {parsedBody}")
     
