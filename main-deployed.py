@@ -73,15 +73,15 @@ def lambda_handler(event, context):
     
     promptText = '''
     I want the answer to be given in three parts. First is "parsedText", second is "aiEditedText", and third is "comment".
-    DO NOT INCLUDE ``` prefix and ``` in the postfix.    
+    DO NOT INCLUDE ``` prefix and ``` in the postfix.
     
-    First, read the text in the attached image and put it in the parsedText.
+    First, be sure to read all the text in the attached image and put it in the parsedText.
     
-    Second, proofread the sentences in the attached image and put it in the aiEditedText.
-    When you find typos, grammar mistakes, and unnatural phrases, please use markdown strikethroughs for the errors and provide corrections in markdown bold.
-    Markdown strikethroughs use double ~~, not single ~. For example ~~the~~, not ~the~.
-    Also, PLEASE MAKE SURE TO add specified characters at the beginning and end of typos, grammar mistakes, and unnatural phrases.
-    Starting with #$ and ending with $#. For example, #$~~Unnatural pharases~~ **Edited version.**$#
+    Second, proofread the phrases in parsedText following instructions below and put it in the aiEditedText.
+    1. If there is nothing to proofread, add the text as it is.
+    2. If errors like typos, grammar mistakes, and unnatural phrases are found, please provide proofread version in the specified form below.
+    3. The specified form : #$~-error version-~ *+proofread version+*$#
+    4. Explanations on specified form [1] put ~- at the beginning of error version and -~ at the end of error version [2] put *+ at the beginning of proofread version and +* at the end of proofread version [3] put #$ at the beginning of two versions combined and $# at the end of two versions combined
 
     Third, provide comments to the original text following given directions.
     When writing comments, if you want to quote some of the words used , please use single quote(') not double quote("). And do not list suggestions, write in normal paragraph.
@@ -122,7 +122,8 @@ def lambda_handler(event, context):
                }
             ]
           }
-        ],        
+        ],
+        max_tokens = 4096 # gpt-4o model's max  
       )
       
       totalTokens = response.usage.total_tokens
@@ -139,7 +140,7 @@ def lambda_handler(event, context):
       parsedContent = json.loads(content)
       print(parsedContent)
 
-      aiEditedSample = parsedContent["aiEditedText"].replace("#$", '<span style="color: red;">').replace("$#", '</span>')
+      aiEditedSample = parsedContent["aiEditedText"].replace("~-", '<s>').replace("-~", '</s>').replace("*+", '<b>').replace("+*", '</b>').replace("#$", '<span style="color: red;">').replace("$#", '</span>')
       print(f"aiEditedSample: {aiEditedSample}")
 
       aiEditedCommentConcat = aiEditedSample + '</br>' + parsedContent["comment"]
