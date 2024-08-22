@@ -84,9 +84,9 @@ def lambda_handler(event, context):
         - If there is nothing to correct, copy the text as it is.
         - If you find errors such as typos, grammatical mistakes, or unnatural phrases, provide the corrected version using the specified format below. But, BE SURE TO only apply this format on where error and proofread version are, not the whole sentence.
         - Use the following format:
-          - Error Version: #$~-error version-~
-          - Corrected Version: *+proofread version+*$#
-          - Example: #$~-they has-~ *+they have+*$#
+          - Error Version: #$~@error version@~
+          - Corrected Version: *@proofread version@*$#
+          - Example: #$~@they has@~ *@they have@*$#
     3.Comment:
       - Third, provide comments from the teacher evaluating the overall work on the original text by following the instructions below.
         - It was written by an elementary school student who is learning English as a foreign language. The student's English level is equivalent to that of a {gradeMapByLevelName[levelName.upper()]} grader in the U.S.
@@ -144,7 +144,7 @@ def lambda_handler(event, context):
       parsedContent = json.loads(content)
       # print(parsedContent)
 
-      aiEditedSample = parsedContent["aiEditedText"].replace("~-", '<s>').replace("-~", '</s>').replace("*+", '<b>').replace("+*", '</b>').replace("#$", '<span style="color: red;">').replace("$#", '</span>')
+      aiEditedSample = parsedContent["aiEditedText"].replace("~@", '<s>').replace("@~", '</s>').replace("*@", '<b>').replace("@*", '</b>').replace("#$", "<span style='color: red;'>").replace("$#", '</span>')
       # print(f"aiEditedSample: {aiEditedSample}")
 
       aiEditedCommentConcat = aiEditedSample + '</br>' + parsedContent["comment"]
