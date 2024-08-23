@@ -57,7 +57,16 @@ def lambda_handler(event, context):
     """
 
            
-    
+    errorPrefix = "(("
+    errorPostfix = "))"
+    proofreadPrefix = "[("
+    proofreadPostfix = ")]"
+
+    groupPrefix = "[[$"
+    groupPrefixVersion2 = "[[ $"
+    groupPostfix = "$]]"
+    groupPostfixVersion2 = "$ ]]"
+
     promptText = f'''
     I want the answer to be given in three parts. First is "parsedText", second is "aiEditedText", and third is "comment".
 
@@ -70,10 +79,11 @@ def lambda_handler(event, context):
         - If there is nothing to correct, copy the text as it is.        
         - If you find errors such as typos, grammatical mistakes, or unnatural phrases, provide the corrected version using the specified format below. But, BE SURE TO only apply this format on where error and proofread version are, not the whole sentence.
         - Use the following format:
-          - Error Version: <@error version@>
-          - Corrected Version: <^proofread version^>
-          - Encapsulation : BE SURE TO encapsulate error version and correct version together beginning with [[$ and ending with $]]
-          - Example : [[$ <@they has@> <^they have^> $]]        
+          - Error Version: {errorPrefix} error version {errorPostfix}
+          - Corrected Version: {proofreadPrefix} proofread version {proofreadPostfix}
+          - Encapsulation : BE SURE TO encapsulate error version and correct version together beginning with {groupPrefix} and ending with {groupPostfix}
+          - Example : {groupPrefix} {errorPrefix} they has {errorPostfix} {proofreadPrefix} they have {proofreadPostfix} {groupPostfix}
+        - DOUBLE CHECK if you have thoroughly followed given format for aiEditedText.
     3.Comment:
       - Third, provide comments from the teacher evaluating the overall work on the original text by following the instructions below.
         - When quoting specific words from the original text, use single quotes (' ') instead of double quotes (" "). And do not list suggestions, write in normal paragraph and DO NOT break lines.
@@ -82,8 +92,9 @@ def lambda_handler(event, context):
     cautionText = '''
     IMPORTANT:
       - Ensure that the final output is in perfect JSON format, like this:
-        - {"parsedText":"first task result", "aiEditedText":"second task result", "comment":"comments provided"}
+        - {"parsedText":"first task result", "aiEditedText":"second task result", "comment":"comments provided"}      
       - Make sure to close the value of each string with double quotes (" "). The response will be parsed using the json.loads() function in Python.
+      
     '''
     
     promptText+=cautionText
@@ -126,7 +137,7 @@ def lambda_handler(event, context):
       parsedContent = json.loads(content)
       # print(parsedContent)
 
-      aiEditedSample = parsedContent["aiEditedText"].replace("<@", '<s>').replace("@>", '</s>').replace("<^", '<b>').replace("^>", '</b>').replace("[[$", "<span style='color: red;'>").replace("$]]", "</span>")
+      aiEditedSample = parsedContent["aiEditedText"].replace(errorPrefix, '<s>').replace(errorPostfix, '</s>').replace(proofreadPrefix, '<b>').replace(proofreadPostfix, '</b>').replace(groupPrefix, "<span style='color: red;'>").replace(groupPostfix, "</span>").replace(groupPrefixVersion2, "<span style='color: red;'>").replace(groupPostfixVersion2, "</span>")
       # print(f"aiEditedSample: {aiEditedSample}")
 
       aiEditedCommentConcat = aiEditedSample + '</br>' + parsedContent["comment"]
