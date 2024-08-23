@@ -172,6 +172,7 @@ def lambda_handler(event, context):
        - It was written by an elementary school student who is learning English as a foreign language. The student's English level is equivalent to that of a {gradeMapByLevelName[levelName.upper()]} grader in the U.S.
        - Please use a friendly tone and mention specific parts of the essay, highlighting three key positive aspects. Also, point out the areas that need improvement with model examples and explain why these aspects are problematic, using two key terms.
        ''',
+       
        "GRAMMAR&WRITING":f'''
         - It was written by an elementary school student who is learning English as a foreign language. The student's English level is equivalent to that of a {gradeMapByLevelName[levelName.upper()]} grader in the U.S.
         - Please use a friendly tone and mention specific parts of the essay, highlighting three key positive aspects. Also, point out the areas that need improvement with model examples and explain why these aspects are problematic, using two key terms.
@@ -190,13 +191,14 @@ def lambda_handler(event, context):
         - If there is nothing to correct, copy the text as it is.
         - If you find errors such as typos, grammatical mistakes, or unnatural phrases, provide the corrected version using the specified format below. But, BE SURE TO only apply this format on where error and proofread version are, not the whole sentence.
         - Use the following format:
-          - Error Version: #$~@error version@~
-          - Corrected Version: *@proofread version@*$#
-          - Example: #$~@they has@~ *@they have@*$#
+          - Error Version: <@error version@>
+          - Corrected Version: <^proofread version^>
+          - Encapsulation : BE SURE TO encapsulate error version and correct version together beginning with <$ and ending with $>
+          - Example : <$ <@they has@> <^they have^> $>
     3.Comment:
       - Third, provide comments from the teacher evaluating the overall work on the original text by following the instructions below.
-        - When quoting specific words from the original text, use single quotes (' ') instead of double quotes (" "). And do not list suggestions, write in normal paragraph.        
-        {commentPromptMapBySubjectName[subjectName.upper()][levelName.upper()]}
+        - When quoting specific words from the original text, use single quotes (' ') instead of double quotes (" "). And do not list suggestions, write in normal paragraph and DO NOT break lines.
+        {commentPromptMapBySubjectName[subjectName.upper()][levelName.upper()] if subjectName.upper() == 'SPEECH' or subjectName.upper() == 'DEBATE' else commentPromptMapBySubjectName[subjectName.upper()]} 
     '''        
     cautionText = '''
     IMPORTANT:
@@ -245,7 +247,7 @@ def lambda_handler(event, context):
       parsedContent = json.loads(content)
       # print(parsedContent)
 
-      aiEditedSample = parsedContent["aiEditedText"].replace("~@", '<s>').replace("@~", '</s>').replace("*@", '<b>').replace("@*", '</b>').replace("#$", "<span style='color: red;'>").replace("$#", "</span>")
+      aiEditedSample = parsedContent["aiEditedText"].replace("<@", '<s>').replace("@>", '</s>').replace("<^", '<b>').replace("^>", '</b>').replace("<$", "<span style='color: red;'>").replace("$>", "</span>")
       # print(f"aiEditedSample: {aiEditedSample}")
 
       aiEditedCommentConcat = aiEditedSample + '</br>' + parsedContent["comment"]
@@ -264,7 +266,7 @@ def lambda_handler(event, context):
 # for local test
 if __name__ == "__main__":
     event = {
-       "body": "{\"imageUrl\": \"https://s3.ap-northeast-2.amazonaws.com/cdn-staging.topialive.co.kr/pdf-homework/1723875053228/1723875054109.png\",\"levelName\": \"V2\",\"subjectName\": \"SPEECH\"}"
+       "body": "{\"imageUrl\": \"https://s3.ap-northeast-2.amazonaws.com/cdn-staging.topialive.co.kr/pdf-homework/1723875053228/1723875054109.png\",\"levelName\": \"V2\",\"subjectName\": \"GRAMMAR&WRITING\"}"
     }
     context = []
     lambda_handler(event,context)
