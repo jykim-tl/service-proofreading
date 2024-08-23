@@ -70,23 +70,25 @@ def lambda_handler(event, context):
     promptText = f'''
     I want the answer to be given in three parts. First is "parsedText", second is "aiEditedText", and third is "comment".
 
-    DO NOT include ``` as a prefix or postfix in your response.
+    DO NOT include ``` as a prefix or postfix in your response.      
 
     1. parsedText:
-      - First, read all the text in the attached image, except for the text inside the box labeled "Template." Assign the text you've read to the parsedText field. DO NOT PROOFREAD what is in the parsedText field.
+      - Carefully read all the text in the attached image, excluding the text inside the box labeled "Template."
+      - Assign the text you've read to the parsedText field.
+      - Do NOT make any corrections or changes to this text.      
     2. aiEditedText:    
-      - Second, proofread the text assigned at parsedText by following the instructions below and place the corrected version in the aiEditedText field:
-        - If there is nothing to correct, copy the text as it is.        
-        - If you find errors such as typos, grammatical mistakes, or unnatural phrases, provide the corrected version using the specified format below. But, BE SURE TO only apply this format on where error and proofread version are, not the whole sentence.
-        - Use the following format:
-          - Error Version: {errorPrefix} error version {errorPostfix}
-          - Corrected Version: {proofreadPrefix} proofread version {proofreadPostfix}
-          - Encapsulation : BE SURE TO encapsulate error version and correct version together beginning with {groupPrefix} and ending with {groupPostfix}
-          - Example : {groupPrefix} {errorPrefix} they has {errorPostfix} {proofreadPrefix} they have {proofreadPostfix} {groupPostfix}
-        - DOUBLE CHECK if you have thoroughly followed given format for aiEditedText.
+      - Proofread the text in parsedText, correcting any typos, grammatical errors, or unnatural phrases. Use the following specific format for each correction:
+        - Error Version: {errorPrefix} error version {errorPostfix}
+        - Corrected Version: {proofreadPrefix} corrected version {proofreadPostfix}
+        - Encapsulation: Encapsulate both versions beginning with {groupPrefix} and ending with {groupPostfix}.
+        - Example: {groupPrefix} {errorPrefix} they has {errorPostfix} {proofreadPrefix} they have {proofreadPostfix} {groupPostfix}
+      - Only apply the format to the exact location where the correction is made. Do NOT include the entire sentence in the format—just the specific error and its correction.
+      - If no corrections are needed, copy the text as it is.
+      - DOUBLE CHECK that you have thoroughly followed the given format for aiEditedText before finalizing your response.
     3.Comment:
-      - Third, provide comments from the teacher evaluating the overall work on the original text by following the instructions below.
-        - When quoting specific words from the original text, use single quotes (' ') instead of double quotes (" "). And do not list suggestions, write in normal paragraph and DO NOT break lines.
+      - Provide feedback in the form of a single paragraph. Do not list suggestions.
+      - Quote specific words using single quotes (' ') and ensure the comment is based on the student's original text, not the corrected version.
+      - Do NOT break lines      
         {getCommentGuide(subjectName.upper(), levelName.upper())} 
     '''        
     cautionText = '''
