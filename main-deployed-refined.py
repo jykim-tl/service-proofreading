@@ -67,13 +67,13 @@ def lambda_handler(event, context):
       - First, read all the text in the attached image, except for the text inside the box labeled "Template." Assign the text you've read to the parsedText field. DO NOT PROOFREAD what is in the parsedText field.
     2. aiEditedText:    
       - Second, proofread the text assigned at parsedText by following the instructions below and place the corrected version in the aiEditedText field:
-        - If there is nothing to correct, copy the text as it is.
+        - If there is nothing to correct, copy the text as it is.        
         - If you find errors such as typos, grammatical mistakes, or unnatural phrases, provide the corrected version using the specified format below. But, BE SURE TO only apply this format on where error and proofread version are, not the whole sentence.
         - Use the following format:
           - Error Version: <@error version@>
           - Corrected Version: <^proofread version^>
-          - Encapsulation : BE SURE TO encapsulate error version and correct version together beginning with [$ and ending with $]
-          - Example : [$ <@they has@> <^they have^> $]
+          - Encapsulation : BE SURE TO encapsulate error version and correct version together beginning with [[$ and ending with $]]
+          - Example : [[$ <@they has@> <^they have^> $]]        
     3.Comment:
       - Third, provide comments from the teacher evaluating the overall work on the original text by following the instructions below.
         - When quoting specific words from the original text, use single quotes (' ') instead of double quotes (" "). And do not list suggestions, write in normal paragraph and DO NOT break lines.
@@ -126,7 +126,7 @@ def lambda_handler(event, context):
       parsedContent = json.loads(content)
       # print(parsedContent)
 
-      aiEditedSample = parsedContent["aiEditedText"].replace("<@", '<s>').replace("@>", '</s>').replace("<^", '<b>').replace("^>", '</b>').replace("[$", "<span style='color: red;'>").replace("$]", "</span>")
+      aiEditedSample = parsedContent["aiEditedText"].replace("<@", '<s>').replace("@>", '</s>').replace("<^", '<b>').replace("^>", '</b>').replace("[[$", "<span style='color: red;'>").replace("$]]", "</span>")
       # print(f"aiEditedSample: {aiEditedSample}")
 
       aiEditedCommentConcat = aiEditedSample + '</br>' + parsedContent["comment"]
