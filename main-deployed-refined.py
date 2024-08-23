@@ -172,7 +172,10 @@ def lambda_handler(event, context):
        - It was written by an elementary school student who is learning English as a foreign language. The student's English level is equivalent to that of a {gradeMapByLevelName[levelName.upper()]} grader in the U.S.
        - Please use a friendly tone and mention specific parts of the essay, highlighting three key positive aspects. Also, point out the areas that need improvement with model examples and explain why these aspects are problematic, using two key terms.
        ''',
-       "GRAMMAR&WRITING":"",
+       "GRAMMAR&WRITING":f'''
+        - It was written by an elementary school student who is learning English as a foreign language. The student's English level is equivalent to that of a {gradeMapByLevelName[levelName.upper()]} grader in the U.S.
+        - Please use a friendly tone and mention specific parts of the essay, highlighting three key positive aspects. Also, point out the areas that need improvement with model examples and explain why these aspects are problematic, using two key terms.
+        ''',
     }
     
     promptText = f'''
