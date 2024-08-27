@@ -56,16 +56,18 @@ def lambda_handler(event, context):
     proofreading 수준 및 comment 수준 결정해야함.
     """
 
+
+# [[%$
            
     errorPrefix = "(("
     errorPostfix = "))"
-    proofreadPrefix = "[("
-    proofreadPostfix = ")]"
+    proofreadPrefix = "[["
+    proofreadPostfix = "]]"
 
-    groupPrefix = "[[$"
-    groupPrefixVersion2 = "[[ $"
-    groupPostfix = "$]]"
-    groupPostfixVersion2 = "$ ]]"
+    groupPrefix = "{{"
+    groupPrefixVersion2 = "} }"
+    groupPostfix = "}}"
+    groupPostfixVersion2 = "} }"
 
     promptText = f'''
     I want the answer to be given in three parts. First is "parsedText", second is "aiEditedText", and third is "comment".
