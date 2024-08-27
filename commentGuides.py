@@ -75,7 +75,139 @@ def getCommentGuide(subjectName:str, levelName:str):
                     - Sentence Count: Ensure that the student has met the minimum requirement of 10 sentences. If they haven't, suggest ways to expand their ideas or add details to meet this requirement.
                 - The overall comment should be one paragraph, without bullet points, at least but no longer than 10 sentences, and should start with a compliment. The general aim should be to encourage the student while providing specific, actionable advice for improvement. Do not use too many “but”s as it may discourage the student. Provide examples for improvement as well.
             '''     
-        },       
+        },
+        "SPEECH(A)":{
+            "V1":'''
+            - If the image includes Summary Writing at the top of the page, then follow the Summary Writing Instructions.
+            - If the image includes Short Speech Writing at the top of the page, then follow the Short Speech Writing Instructions.
+            - If the image inlcudes none of them, follow Summary Writing Instructions.
+
+            - Summary Writing Instructions
+                - Please provide constructive feedback on a student's summary essay. The student is at an AR 3 (Lexile 650) level and must have written a summary based on a given template. The feedback should be written in a friendly and encouraging tone, focusing on the following areas:
+                    - Organization: Comment on the clarity and structure of the topic sentence, body paragraphs, and conclusion.
+                    - Vocabulary: Evaluate the student’s word choice, suggesting ways they might vary their vocabulary or use synonyms to improve paraphrasing.
+                    - Paraphrasing: Assess the effectiveness of the student’s paraphrasing, offering advice on how they can better rephrase content if necessary.
+                - The overall comment should be one paragraph, without bullet points, no longer than 8 sentences, and should start with a compliment. The general aim should be to encourage the student while providing specific, actionable advice for improvement. Do not use too many “but”s as it may discourage the student. Provide examples for improvement if necessary.
+
+            - Short Speech Writing Instructions
+                - Please provide constructive feedback on a student's short speech, written using the provided template. The student is at an AR 3 (Lexile 650) level and has written a speech that includes at least 8 sentences: one topic sentence, one conclusion sentence, and body paragraphs. The feedback should be written in a friendly and encouraging tone, focusing on the following areas:
+                    - Organization: Comment on the clarity and structure of the speech, ensuring the topic sentence, body paragraphs, and conclusion sentence are effectively organized.
+                    - Main Idea and Supporting Details: Evaluate how well the student presents the main idea and supports it with relevant details in the body paragraphs. Recommend that the student includes details such as benefits, harms, necessity, etc., about the given resolution.
+                    - Vocabulary: Assess the student's choice of vocabulary, offering suggestions for improvement if necessary.
+                    - Paraphrasing: If relevant, mention the effectiveness of paraphrasing within the speech.
+                    - Sentence Count: Ensure that the student has met the minimum requirement of 8 sentences. If they haven't, suggest ways to expand their ideas or add details to meet this requirement.
+                - The overall comment should be one paragraph, without bullet points, at least but no longer than 8 sentences, and should start with a compliment. The general aim should be to encourage the student while providing specific, actionable advice for improvement. Do not use too many “but”s as it may discourage the student. Provide examples for improvement as well.
+               
+            ''',
+            "V2":'''
+            - If the image includes Summary Writing at the top of the page, then follow the Summary Writing Instructions.
+            - If the image includes Short Speech Writing at the top of the page, then follow the Short Speech Writing Instructions.
+            - If the image inlcudes none of them, follow Summary Writing Instructions.
+
+            - Summary Writing Instructions
+                - Please provide constructive feedback on a student's summary essay. The student is at an AR 3 (Lexile 650) level and must have written a summary based on a given template. The feedback should be written in a friendly and encouraging tone, focusing on the following areas:
+                    - Organization: Comment on the clarity and structure of the topic sentence, body paragraphs, and conclusion.
+                    - Vocabulary: Evaluate the student’s word choice, suggesting ways they might vary their vocabulary or use synonyms to improve paraphrasing.
+                    - Paraphrasing: Assess the effectiveness of the student’s paraphrasing, offering advice on how they can better rephrase content if necessary.
+                - The overall comment should be one paragraph, without bullet points, no longer than 8 sentences, and should start with a compliment. The general aim should be to encourage the student while providing specific, actionable advice for improvement. Do not use too many “but”s as it may discourage the student. Provide examples for improvement if necessary.
+
+            - Short Speech Writing Instructions
+                - Please provide constructive feedback on a student's short speech, written using the provided template. The student is at an AR 3 (Lexile 650) level and has written a speech that includes at least 8 sentences: one topic sentence, one conclusion sentence, and body paragraphs. The feedback should be written in a friendly and encouraging tone, focusing on the following areas:
+                    - Organization: Comment on the clarity and structure of the speech, ensuring the topic sentence, body paragraphs, and conclusion sentence are effectively organized.
+                    - Main Idea and Supporting Details: Evaluate how well the student presents the main idea and supports it with relevant details in the body paragraphs. Recommend that the student includes details such as benefits, harms, necessity, etc., about the given resolution.
+                    - Vocabulary: Assess the student's choice of vocabulary, offering suggestions for improvement if necessary.
+                    - Paraphrasing: If relevant, mention the effectiveness of paraphrasing within the speech.
+                    - Sentence Count: Ensure that the student has met the minimum requirement of 8 sentences. If they haven't, suggest ways to expand their ideas or add details to meet this requirement.
+                - The overall comment should be one paragraph, without bullet points, at least but no longer than 8 sentences, and should start with a compliment. The general aim should be to encourage the student while providing specific, actionable advice for improvement. Do not use too many “but”s as it may discourage the student. Provide examples for improvement as well.
+            ''',
+            "V3":'''
+            - If the image includes Summary Writing at the top of the page, then follow the Summary Writing Instructions.
+            - If the image includes Short Speech Writing at the top of the page, then follow the Short Speech Writing Instructions.
+            - If the image inlcudes none of them, follow Summary Writing Instructions.
+
+            - Summary Writing Instructions
+                - Please provide constructive feedback on a student's summary essay. The student is at an AR 3.5 (Lexile 700) level and must have written a summary based on a given template. The feedback should be written in a friendly and encouraging tone, focusing on the following area study:
+                    - Organization: Comment on the clarity and structure of the topic sentence, body paragraphs, and conclusion.
+                    - Vocabulary: Evaluate the student’s word choice, suggesting ways they might vary their vocabulary or use synonyms to improve paraphrasing.
+                    - Paraphrasing: Assess the effectiveness of the student’s paraphrasing, offering advice on how they can better rephrase content if necessary.
+                - The overall comment should be one paragraph, without bullet points, no longer than 10 sentences, and should start with a compliment. The general aim should be to encourage the student while providing specific, actionable advice for improvement. Do not use too many “but”s as it may discourage the student. Provide examples for improvement if necessary.
+
+            - Short Speech Writing Instructions
+                - Please provide constructive feedback on a student's short speech, written using the provided template. The student is at an AR 3.5 (Lexile 700) level and must have written a speech that includes at least 10 sentences: one topic sentence, one conclusion sentence, and body paragraphs. The feedback should be written in a friendly and encouraging tone, focusing on the following areas:
+                    - Organization: Comment on the clarity and structure of the speech, ensuring the topic sentence, body paragraphs, and conclusion sentence are effectively organized.
+                    - Main Idea and Supporting Details: Evaluate how well the student presents the main idea and supports it with relevant details in the body paragraphs. Recommend that the student includes details such as benefits, harms, necessity, etc., about the given resolution.
+                    - Vocabulary: Assess the student's choice of vocabulary, offering suggestions for improvement if necessary.
+                    - Paraphrasing: If relevant, mention the effectiveness of paraphrasing within the speech.
+                    - Sentence Count: Ensure that the student has met the minimum requirement of 10 sentences. If they haven't, suggest ways to expand their ideas or add details to meet this requirement.
+                - The overall comment should be one paragraph, without bullet points, at least but no longer than 10 sentences, and should start with a compliment. The general aim should be to encourage the student while providing specific, actionable advice for improvement. Do not use too many “but”s as it may discourage the student. Provide examples for improvement as well.
+            '''     
+        },
+        "SPEECH(B)":{
+            "V1":'''
+            - If the image includes Summary Writing at the top of the page, then follow the Summary Writing Instructions.
+            - If the image includes Short Speech Writing at the top of the page, then follow the Short Speech Writing Instructions.
+            - If the image inlcudes none of them, follow Summary Writing Instructions.
+
+            - Summary Writing Instructions
+                - Please provide constructive feedback on a student's summary essay. The student is at an AR 3 (Lexile 650) level and must have written a summary based on a given template. The feedback should be written in a friendly and encouraging tone, focusing on the following areas:
+                    - Organization: Comment on the clarity and structure of the topic sentence, body paragraphs, and conclusion.
+                    - Vocabulary: Evaluate the student’s word choice, suggesting ways they might vary their vocabulary or use synonyms to improve paraphrasing.
+                    - Paraphrasing: Assess the effectiveness of the student’s paraphrasing, offering advice on how they can better rephrase content if necessary.
+                - The overall comment should be one paragraph, without bullet points, no longer than 8 sentences, and should start with a compliment. The general aim should be to encourage the student while providing specific, actionable advice for improvement. Do not use too many “but”s as it may discourage the student. Provide examples for improvement if necessary.
+
+            - Short Speech Writing Instructions
+                - Please provide constructive feedback on a student's short speech, written using the provided template. The student is at an AR 3 (Lexile 650) level and has written a speech that includes at least 8 sentences: one topic sentence, one conclusion sentence, and body paragraphs. The feedback should be written in a friendly and encouraging tone, focusing on the following areas:
+                    - Organization: Comment on the clarity and structure of the speech, ensuring the topic sentence, body paragraphs, and conclusion sentence are effectively organized.
+                    - Main Idea and Supporting Details: Evaluate how well the student presents the main idea and supports it with relevant details in the body paragraphs. Recommend that the student includes details such as benefits, harms, necessity, etc., about the given resolution.
+                    - Vocabulary: Assess the student's choice of vocabulary, offering suggestions for improvement if necessary.
+                    - Paraphrasing: If relevant, mention the effectiveness of paraphrasing within the speech.
+                    - Sentence Count: Ensure that the student has met the minimum requirement of 8 sentences. If they haven't, suggest ways to expand their ideas or add details to meet this requirement.
+                - The overall comment should be one paragraph, without bullet points, at least but no longer than 8 sentences, and should start with a compliment. The general aim should be to encourage the student while providing specific, actionable advice for improvement. Do not use too many “but”s as it may discourage the student. Provide examples for improvement as well.
+               
+            ''',
+            "V2":'''
+            - If the image includes Summary Writing at the top of the page, then follow the Summary Writing Instructions.
+            - If the image includes Short Speech Writing at the top of the page, then follow the Short Speech Writing Instructions.
+            - If the image inlcudes none of them, follow Summary Writing Instructions.
+
+            - Summary Writing Instructions
+                - Please provide constructive feedback on a student's summary essay. The student is at an AR 3 (Lexile 650) level and must have written a summary based on a given template. The feedback should be written in a friendly and encouraging tone, focusing on the following areas:
+                    - Organization: Comment on the clarity and structure of the topic sentence, body paragraphs, and conclusion.
+                    - Vocabulary: Evaluate the student’s word choice, suggesting ways they might vary their vocabulary or use synonyms to improve paraphrasing.
+                    - Paraphrasing: Assess the effectiveness of the student’s paraphrasing, offering advice on how they can better rephrase content if necessary.
+                - The overall comment should be one paragraph, without bullet points, no longer than 8 sentences, and should start with a compliment. The general aim should be to encourage the student while providing specific, actionable advice for improvement. Do not use too many “but”s as it may discourage the student. Provide examples for improvement if necessary.
+
+            - Short Speech Writing Instructions
+                - Please provide constructive feedback on a student's short speech, written using the provided template. The student is at an AR 3 (Lexile 650) level and has written a speech that includes at least 8 sentences: one topic sentence, one conclusion sentence, and body paragraphs. The feedback should be written in a friendly and encouraging tone, focusing on the following areas:
+                    - Organization: Comment on the clarity and structure of the speech, ensuring the topic sentence, body paragraphs, and conclusion sentence are effectively organized.
+                    - Main Idea and Supporting Details: Evaluate how well the student presents the main idea and supports it with relevant details in the body paragraphs. Recommend that the student includes details such as benefits, harms, necessity, etc., about the given resolution.
+                    - Vocabulary: Assess the student's choice of vocabulary, offering suggestions for improvement if necessary.
+                    - Paraphrasing: If relevant, mention the effectiveness of paraphrasing within the speech.
+                    - Sentence Count: Ensure that the student has met the minimum requirement of 8 sentences. If they haven't, suggest ways to expand their ideas or add details to meet this requirement.
+                - The overall comment should be one paragraph, without bullet points, at least but no longer than 8 sentences, and should start with a compliment. The general aim should be to encourage the student while providing specific, actionable advice for improvement. Do not use too many “but”s as it may discourage the student. Provide examples for improvement as well.
+            ''',
+            "V3":'''
+            - If the image includes Summary Writing at the top of the page, then follow the Summary Writing Instructions.
+            - If the image includes Short Speech Writing at the top of the page, then follow the Short Speech Writing Instructions.
+            - If the image inlcudes none of them, follow Summary Writing Instructions.
+
+            - Summary Writing Instructions
+                - Please provide constructive feedback on a student's summary essay. The student is at an AR 3.5 (Lexile 700) level and must have written a summary based on a given template. The feedback should be written in a friendly and encouraging tone, focusing on the following area study:
+                    - Organization: Comment on the clarity and structure of the topic sentence, body paragraphs, and conclusion.
+                    - Vocabulary: Evaluate the student’s word choice, suggesting ways they might vary their vocabulary or use synonyms to improve paraphrasing.
+                    - Paraphrasing: Assess the effectiveness of the student’s paraphrasing, offering advice on how they can better rephrase content if necessary.
+                - The overall comment should be one paragraph, without bullet points, no longer than 10 sentences, and should start with a compliment. The general aim should be to encourage the student while providing specific, actionable advice for improvement. Do not use too many “but”s as it may discourage the student. Provide examples for improvement if necessary.
+
+            - Short Speech Writing Instructions
+                - Please provide constructive feedback on a student's short speech, written using the provided template. The student is at an AR 3.5 (Lexile 700) level and must have written a speech that includes at least 10 sentences: one topic sentence, one conclusion sentence, and body paragraphs. The feedback should be written in a friendly and encouraging tone, focusing on the following areas:
+                    - Organization: Comment on the clarity and structure of the speech, ensuring the topic sentence, body paragraphs, and conclusion sentence are effectively organized.
+                    - Main Idea and Supporting Details: Evaluate how well the student presents the main idea and supports it with relevant details in the body paragraphs. Recommend that the student includes details such as benefits, harms, necessity, etc., about the given resolution.
+                    - Vocabulary: Assess the student's choice of vocabulary, offering suggestions for improvement if necessary.
+                    - Paraphrasing: If relevant, mention the effectiveness of paraphrasing within the speech.
+                    - Sentence Count: Ensure that the student has met the minimum requirement of 10 sentences. If they haven't, suggest ways to expand their ideas or add details to meet this requirement.
+                - The overall comment should be one paragraph, without bullet points, at least but no longer than 10 sentences, and should start with a compliment. The general aim should be to encourage the student while providing specific, actionable advice for improvement. Do not use too many “but”s as it may discourage the student. Provide examples for improvement as well.
+            '''     
+        },
         "DEBATE":{
             "O1":'''
                 - Please provide constructive feedback on a student's short speech, written using the provided template. The student is at an AR 4 (Lexile 750) level and must have written a speech that includes at least 12 sentences: one topic sentence, one conclusion sentence, and one body paragraph. The feedback should be written in a friendly and encouraging tone, focusing on the following areas:

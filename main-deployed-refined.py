@@ -89,7 +89,7 @@ def lambda_handler(event, context):
       - Provide feedback in the form of a single paragraph. Do not list suggestions.
       - Quote specific words using single quotes (' ') and ensure the comment is based on the student's original text, not the corrected version.
       - Do NOT break lines      
-        {getCommentGuide(subjectName.upper(), levelName.upper())} 
+      {getCommentGuide(subjectName.upper(), levelName.upper())} 
     '''        
     cautionText = '''
     IMPORTANT:
