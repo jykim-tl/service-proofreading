@@ -85,7 +85,7 @@ def lambda_handler(event, context):
         - Encapsulation: Encapsulate both versions beginning with {groupPrefix} and ending with {groupPostfix}.
         - Example: {groupPrefix} {errorPrefix} they has {errorPostfix} {proofreadPrefix} they have {proofreadPostfix} {groupPostfix}
       - Only apply the format to the exact location where the correction is made. Do NOT include the entire sentence in the format—just the specific error and its correction.
-      - If no corrections are needed, copy the text as it is.
+      - If no corrections are needed, include the text as it is. DO NOT discard the not corrected part. It should also be in the text aiEditedText.
       - DOUBLE CHECK that you have thoroughly followed the given format for aiEditedText before finalizing your response.
     3.Comment:
       - Provide feedback in the form of a single paragraph. Do not list suggestions.
@@ -160,7 +160,7 @@ def lambda_handler(event, context):
 # for local test
 if __name__ == "__main__":
     event = {
-       "body": "{\"imageUrl\": \"https://s3.ap-northeast-2.amazonaws.com/cdn-staging.topialive.co.kr/pdf-homework/1723875053228/1723875054109.png\",\"levelName\": \"V2\",\"subjectName\": \"SPEECH\"}"
+       "body": "{\"imageUrl\": \"https://s3.ap-northeast-2.amazonaws.com/cdn-dev.topialive.co.kr/1725006495203.jpg\",\"levelName\": \"V3\",\"subjectName\": \"SPEECH(B)\"}"
     }
     context = []
     lambda_handler(event,context)
