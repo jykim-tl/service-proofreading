@@ -160,7 +160,7 @@ def lambda_handler(event, context):
 # for local test
 if __name__ == "__main__":
     event = {
-       "body": "{\"imageUrl\": \"https://s3.ap-northeast-2.amazonaws.com/cdn-dev.topialive.co.kr/1725006495203.jpg\",\"levelName\": \"V3\",\"subjectName\": \"SPEECH(B)\"}"
+       "body": "{\"imageUrl\": \"https://s3.ap-northeast-2.amazonaws.com/cdn.topialive.co.kr/1725447349095.jpg\",\"levelName\": \"E3\",\"subjectName\": \"WRITING\"}"
     }
     context = []
     lambda_handler(event,context)
