@@ -56,9 +56,6 @@ def lambda_handler(event, context):
     proofreading 수준 및 comment 수준 결정해야함.
     """
 
-
-# [[%$
-           
     errorPrefix = "(("
     errorPostfix = "))"
     proofreadPrefix = "[["
@@ -75,11 +72,14 @@ def lambda_handler(event, context):
     DO NOT include ``` as a prefix or postfix in your response.      
 
     1. parsedText:
-      - Carefully read all the text in the attached image, excluding the text inside the box labeled "Template."
-      - Assign the text you've read to the parsedText field.
-      - Do NOT make any corrections or changes to this text.      
+      - Carefully extract all readable text in the attached image, excluding any text inside the box labeled "Template."
+      - If you encounter a sentence identical to the following: `Education For Evaluation Purposes Only (remove with TRIAL key)`, ignore it.
+      - Ignore any book title, author name, or page number typically found at the top or bottom of the image.
+      - After reading the text, validate it for logical consistency to ensure it forms coherent sentences. If something seems incomplete or broken, flag it as such, but do not correct any of the content.
+      - Once confirmed, store this raw, unaltered text in the parsedText field.
     2. aiEditedText:    
-      - Proofread the text in parsedText, correcting any typos, grammatical errors, or unnatural phrases. Use the following specific format for each correction:
+      - Proofread the content from parsedText, focusing on grammar, spelling, and unnatural phrasing.
+      - Use this format for any corrections:
         - Error Version: {errorPrefix} error version {errorPostfix}
         - Corrected Version: {proofreadPrefix} corrected version {proofreadPostfix}
         - Encapsulation: Encapsulate both versions beginning with {groupPrefix} and ending with {groupPostfix}.
@@ -87,24 +87,25 @@ def lambda_handler(event, context):
       - Only apply the format to the exact location where the correction is made. Do NOT include the entire sentence in the format—just the specific error and its correction.
       - If no corrections are needed, include the text as it is. DO NOT discard the not corrected part. It should also be in the text aiEditedText.
       - DOUBLE CHECK that you have thoroughly followed the given format for aiEditedText before finalizing your response.
-    3.Comment:
-      - Provide feedback in the form of a single paragraph. Do not list suggestions.
+    3.Comment:    
+      - Write a single-paragraph comment providing constructive feedback. Do not list suggestions.
       - Quote specific words using single quotes (' ') and ensure the comment is based on the student's original text, not the corrected version.
-      - Do NOT break lines      
+      - Do NOT break lines
+      - Start the paragraph with given prefix : '- Comment :'
+      - If no valid sentences are found in the image, return "Blank Page" as the comment output.
       {getCommentGuide(subjectName.upper(), levelName.upper())} 
-    '''        
+    '''
     cautionText = '''
     IMPORTANT:
       - Ensure that the final output is in perfect JSON format, like this:
-        - {"parsedText":"first task result", "aiEditedText":"second task result", "comment":"comments provided"}      
+        - {"parsedText":"first task result", "aiEditedText":"second task result", "comment":"comments provided"}
       - Make sure to close the value of each string with double quotes (" "). The response will be parsed using the json.loads() function in Python.
-      
     '''
     
     promptText+=cautionText
     
     print(f"IMAGE_URL : {imageUrl}")
-    print(f"PROMPT_TEXT : {promptText}")
+    # print(f"PROMPT_TEXT : {promptText}")
 
     try:
       response = client.chat.completions.create(
@@ -127,6 +128,11 @@ def lambda_handler(event, context):
         max_tokens = 4096 # gpt-4o model's max  
       )
       
+      print('==================================================')
+      print('================= START promptText ===============')
+      print(promptText)
+      print('================== END promptText ================')
+      print('==================================================')
       totalTokens = response.usage.total_tokens
       print('TOTAL TOKENS USED', totalTokens)
       print('==================================================')
@@ -160,7 +166,7 @@ def lambda_handler(event, context):
 # for local test
 if __name__ == "__main__":
     event = {
-       "body": "{\"imageUrl\": \"https://s3.ap-northeast-2.amazonaws.com/cdn.topialive.co.kr/1725447349095.jpg\",\"levelName\": \"L1\",\"subjectName\": \"WRITING\"}"
+       "body": "{\"imageUrl\": \"https://s3.ap-northeast-2.amazonaws.com/cdn.topialive.co.kr/pdf-homework/1727176352118/1727176352461.png\",\"levelName\": \"L1\",\"subjectName\": \"WRITING\"}"
     }
     context = []
     lambda_handler(event,context)
