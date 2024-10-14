@@ -67,31 +67,37 @@ def lambda_handler(event, context):
     groupPostfixVersion2 = "} }"
 
     promptText = f'''
-    I want the answer to be given in three parts. First is "parsedText", second is "aiEditedText", and third is "comment".
+    You will be given (an) image(s) that include English text. DO NOT consider it to be Spanish or any other language.
+    I want you to parse, edit, and provide feedback on the provided text in English.
+    I want the response to be in three parts: First is "parsedText", second is "aiEditedText", and third is "comment".
+    DO NOT include `json` or any formatting symbols like backticks as a prefix or postfix in your response.
 
-    DO NOT include ``` as a prefix or postfix in your response.      
-
-    1. parsedText:
-      - Carefully extract all readable text in the attached image, excluding any text inside the box labeled "Template."
-      - If you encounter a sentence identical to the following: `Education For Evaluation Purposes Only (remove with TRIAL key)`, ignore it.
-      - Ignore any book title, author name, or page number typically found at the top or bottom of the image.
-      - After reading the text, validate it for logical consistency to ensure it forms coherent sentences. If something seems incomplete or broken, flag it as such, but do not correct any of the content.
-      - Once confirmed, store this raw, unaltered text in the parsedText field.
-    2. aiEditedText:    
-      - Proofread the content from parsedText, focusing on grammar, spelling, and unnatural phrasing.
-      - Use this format for any corrections:
+    1. **parsedText:
+      - Carefully extract all readable text from the attached image(s), excluding any text inside the box labeled "Template."
+      - Ignore the following sentence if encountered: `Education For Evaluation Purposes Only (remove with TRIAL key)`.
+      - Separate paragraphs where appropriate.
+      - Ignore any book titles, author names, or page numbers typically found at the top or bottom of the image.
+      - Validate the text for logical consistency to ensure coherent sentences. If something appears incomplete or broken, flag it as such without correcting it.
+      - Store this raw, unaltered text in the `parsedText` field.
+    2. **aiEditedText:    
+      - Proofread the content from `parsedText`, focusing on grammar, spelling, and unnatural phrasing.
+      - Double-check that capitalization is properly applied.
+      - Use the following format for any corrections:
         - Error Version: {errorPrefix} error version {errorPostfix}
         - Corrected Version: {proofreadPrefix} corrected version {proofreadPostfix}
         - Encapsulation: Encapsulate both versions beginning with {groupPrefix} and ending with {groupPostfix}.
         - Example: {groupPrefix} {errorPrefix} they has {errorPostfix} {proofreadPrefix} they have {proofreadPostfix} {groupPostfix}
-      - Only apply the format to the exact location where the correction is made. Do NOT include the entire sentence in the format—just the specific error and its correction.
-      - If no corrections are needed, include the text as it is. DO NOT discard the not corrected part. It should also be in the text aiEditedText.
-      - DOUBLE CHECK that you have thoroughly followed the given format for aiEditedText before finalizing your response.
-    3.Comment:    
-      - Write a single-paragraph comment providing constructive feedback. Do not list suggestions.
-      - Quote specific words using single quotes (' ') and ensure the comment is based on the student's original text, not the corrected version.
-      - Do NOT break lines
-      - Start the paragraph with given prefix : '- Comment :'
+      - Only apply the format to the specific location of the error, not the entire sentence.
+      - If no corrections are needed, retain the uncorrected text in `aiEditedText`. DO NOT discard any portion of the text.
+      - If the error version and the corrected version are the same, it means you have accidentally edited an already correct word, phrase, or sentence. Revert it to its original form.
+      - Ensure the final output strictly follows the correction format.
+    3.**comment:    
+      - Write a single-paragraph, first-person comment providing constructive feedback. DO NOT list suggestions in bullet points.
+      - Remember that the comment will be given to elementary school students, so avoid using complex words.
+      - Consider the overall context of the text. If certain content or sentence structures repeat, give feedback on this.
+      - Quote specific words using single quotes (' ') and base the comment on the student's original text, not the corrected version.
+      - DO NOT break lines in the comment.
+      - Start the paragraph with this exact prefix: `- Comment:`
       - If no valid sentences are found in the image, return "Blank Page" as the comment output.
       {getCommentGuide(subjectName.upper(), levelName.upper())} 
     '''
