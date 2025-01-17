@@ -32,6 +32,13 @@ def respond(err, totalTokens, result, promptText):
     
     return response
 
+'''
+type 정의
+IMG-OCR : 이미지 url 을 전달받아서, OCR 만 진행
+IMG-FULL : 이미지 url 을 전달받아서, OCR + PROOFREADING + COMMENT 전부 다 진행
+TEXT-PROOFREADING : 텍스트를 전달받아서, PROOFREADING 만 진행
+TEXT-PROOFREADING-COMMENT : 텍스트를 전달받아서, PROOFREADING + COMMENT 진행
+'''
 def lambda_handler(event, context):
     # params = parse_qs(event)
     
@@ -40,6 +47,10 @@ def lambda_handler(event, context):
       print(body)
       parsedBody = json.loads(body)
       imageUrl:str = parsedBody['imageUrl']
+      # imageUrls:str[] = parsedBody['imageUrls']
+      # 25.01.17 jy.kim : text editor 를 통해 입력한 내용을 첨삭을 위해 전달할 때 사용 (과제 유형 : First Draft / type : PROOFREADING-COMMENT)
+      inputText:str = parsedBody['inputText'] 
+      type:str = parsedBody['type'] # FULL, OCR, PROOFREADING, PROOFREADING-COMMENT
       levelName:str = parsedBody['levelName']
       subjectName:str = parsedBody['subjectName']
     except Exception as e:
@@ -75,6 +86,7 @@ def lambda_handler(event, context):
     1. **parsedText:
       - Carefully extract all readable text from the attached image(s), excluding any text inside the box labeled "Template."
       - Ignore the following sentence if encountered: `Education For Evaluation Purposes Only (remove with TRIAL key)`.
+      - Ignore the following sentence if encountered: `Education For Evaluation Purposes Only`.
       - Separate paragraphs where appropriate.
       - Ignore any book titles, author names, or page numbers typically found at the top or bottom of the image.
       - Validate the text for logical consistency to ensure coherent sentences. If something appears incomplete or broken, flag it as such without correcting it.

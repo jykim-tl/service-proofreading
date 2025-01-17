@@ -1,6 +1,6 @@
 # SERVICE-PROOFREADING
 lambda 에 코드를 복붙하여 배포하는 방식으로 배포.
-(코드 변동이 많지 않음.)
+(코드 변동이 자주 없음.)
 
 배포 버전은 gateway에 연결되어있지 않고, invoke 를 통해서만 호출 가능.
 
