@@ -21,14 +21,11 @@ def respond(err, totalTokens, result, promptText):
             "totalTokens": totalTokens,
             "parsedText": result["parsedText"],
             "aiEditedText": result["aiEditedCommentConcat"],
-            # "promptText": promptText
         }).encode('utf8'),
         'headers': {
             'Content-Type': 'application/json',
         },
     }
-    # print('######### RESPONSE #########')
-    # print(response)
     
     return response
 

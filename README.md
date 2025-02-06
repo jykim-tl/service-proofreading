@@ -1,3 +1,7 @@
+# DEPRECATED
+
+SERVICE-PROOFREADING-v2 프로젝트로 이동
+
 # SERVICE-PROOFREADING
 lambda 에 코드를 복붙하여 배포하는 방식으로 배포.
 (코드 변동이 자주 없음.)
